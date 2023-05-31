@@ -16,11 +16,11 @@ const populateTodos = () => {
     .then((todos) => {
       todos.forEach((currentElement, index) => {
         const title = todos[index]["title"];
-        const newTitle = document.createTextNode(title);
         const list = document.getElementById("todo-list");
         const newListItem = document.createElement("li");
+        const newTitle = document.createTextNode(title);
         newListItem.appendChild(newTitle);
-        document.body.insertBefore(newListItem, list);
+        list.appendChild(newListItem);
       });
     });
 };
