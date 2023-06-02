@@ -26,25 +26,39 @@ const populateTodos = () => {
 };
 
 const filterTodos = () => {
+  clearTodos()
+
   fetchTodos()
     .then((res) => res.json())
     .then((todos) => {
-      const userId = document.getElementById("user-id").value;
+      const userId = document.getElementById("user-id").valueAsNumber;
       console.log(userId);
       let filteredList = [];
       todos.forEach((currentElement, index) => {
         
-        if (todos[index]["userId"] == userId) {
+        if (todos[index]["userId"] === userId) {
+          const title = todos[index]["title"];
           const user = todos[index]["userId"];
-          console.log(user);
+          const list = document.getElementById("todo-list");
+          const newListItem = document.createElement("li");
+          const newUser = document.createTextNode(`user: ${user} - `);
+          const newTitle = document.createTextNode(title);
+          newListItem.appendChild(newUser);
+          newListItem.appendChild(newTitle);
+          list.appendChild(newListItem);
+          filteredList.push(todos[index]);
         }
       });
-      // console.log(filteredList);
+      console.log(filteredList);
     });
-  // console.log(listOfTodos);
+
 };
 
-// console.log(listOfTodos());
+const clearTodos = () => {
+  const list = document.getElementById("todo-list");
+  list.remove();
 
-// const userId = document.getElementById("user-id");
-// const filteredList = listOfTodos.filter((id) => (id = userId));
+  const todoSection = document.getElementById("todo-section");
+  const newOL = Object.assign(document.createElement("ol"),{id:"todo-list"});
+  todoSection.appendChild(newOL)
+}
