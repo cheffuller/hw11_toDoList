@@ -24,3 +24,27 @@ const populateTodos = () => {
       });
     });
 };
+
+const filterTodos = () => {
+  fetchTodos()
+    .then((res) => res.json())
+    .then((todos) => {
+      let filteredList
+      const userId = document.getElementById("user-id").value;
+      console.log(userId);
+
+      todos.forEach((currentElement, index) => {
+        if todos[index]["userId"] === userID {
+          filteredList[index] = todos[index];
+        }
+      });
+      console.log(filteredList);
+    });
+    // console.log(listOfTodos);
+   
+};
+
+// console.log(listOfTodos());
+
+// const userId = document.getElementById("user-id");
+// const filteredList = listOfTodos.filter((id) => (id = userId));

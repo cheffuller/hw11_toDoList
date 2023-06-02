@@ -4,12 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <label for="user-id">User ID:</label>
+    <input id="user-id" type="number" min="1" max="10" />
+    <button onclick="filterTodos()">Filter by User</button>
+    <br /><br /><br /><br />
     <button onclick="logFetchTodos()">Fetch Todos</button>
     <button onclick="logTodos()">Log Todos</button>
     <button onclick="populateTodos()">Populate Todos</button>
+    <br /><br />
+    <button onclick="location.reload()">Clear Todos</button>
     <ol id="todo-list">
       <!-- LIs will go here -->
     </ol>
