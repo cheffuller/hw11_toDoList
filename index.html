@@ -11,17 +11,17 @@
     <label for="user-id">User ID:</label>
     <input id="user-id" type="number" min="1" max="10" />
     <button onclick="filterTodos()">Filter by User</button>
-    <br /><br /><br /><br />
+    <br /><br />
+    <section id="new-button-section"></section>
+    <br />
     <button onclick="logFetchTodos()">Fetch Todos</button>
     <button onclick="logTodos()">Log Todos</button>
     <button onclick="populateTodos()">Populate Todos</button>
     <br /><br />
     <button onclick="clearTodos()">Clear Todos</button>
-    <section id="todo-section">
-      <ol id="todo-list">
-        <!-- LIs will go here -->
-      </ol>
-    </section>
+    <ol id="todo-list">
+      <!-- LIs will go here -->
+    </ol>
     <script src="script.js"></script>
   </body>
 </html>

@@ -26,16 +26,52 @@ const populateTodos = () => {
 };
 
 const filterTodos = () => {
-  clearTodos()
+  clearTodos();
+  clearButtons();
+
+  let filteredList = [];
+
+  const completedTodos = () => {
+    clearTodos();
+    filteredList.forEach((currentElement, index) => {
+      if (filteredList[index]["completed"] === true) {
+        const title = filteredList[index]["title"];
+        const user = filteredList[index]["userId"];
+        const list = document.getElementById("todo-list");
+        const newListItem = document.createElement("li");
+        const newUser = document.createTextNode(`user: ${user} - `);
+        const newTitle = document.createTextNode(title);
+        newListItem.appendChild(newUser);
+        newListItem.appendChild(newTitle);
+        list.appendChild(newListItem);
+      }
+    });
+  };
+
+  const incompleteTodos = () => {
+    clearTodos();
+    filteredList.forEach((currentElement, index) => {
+      if (filteredList[index]["completed"] === false) {
+        const title = filteredList[index]["title"];
+        const user = filteredList[index]["userId"];
+        const list = document.getElementById("todo-list");
+        const newListItem = document.createElement("li");
+        const newUser = document.createTextNode(`user: ${user} - `);
+        const newTitle = document.createTextNode(title);
+        newListItem.appendChild(newUser);
+        newListItem.appendChild(newTitle);
+        list.appendChild(newListItem);
+      }
+    });
+  };
 
   fetchTodos()
     .then((res) => res.json())
     .then((todos) => {
       const userId = document.getElementById("user-id").valueAsNumber;
       console.log(userId);
-      let filteredList = [];
+
       todos.forEach((currentElement, index) => {
-        
         if (todos[index]["userId"] === userId) {
           const title = todos[index]["title"];
           const user = todos[index]["userId"];
@@ -50,15 +86,32 @@ const filterTodos = () => {
         }
       });
       console.log(filteredList);
-    });
 
+
+
+      const newCompletedButton = document.createElement("button");
+      newCompletedButton.onclick = completedTodos;
+
+      const newIncompleteButton = document.createElement("button");
+      newIncompleteButton.onclick = incompleteTodos;
+      
+
+      const newCompletedText = document.createTextNode("Completed Todos");
+      newCompletedButton.appendChild(newCompletedText);
+      const newIncompleteText = document.createTextNode("Incomplete Todos");
+      newIncompleteButton.appendChild(newIncompleteText);
+      const newButtons = document.getElementById("new-button-section");
+      newButtons.appendChild(newCompletedButton);
+      newButtons.appendChild(newIncompleteButton);
+    });
 };
 
 const clearTodos = () => {
   const list = document.getElementById("todo-list");
-  list.remove();
+  list.innerHTML = null;
+};
 
-  const todoSection = document.getElementById("todo-section");
-  const newOL = Object.assign(document.createElement("ol"),{id:"todo-list"});
-  todoSection.appendChild(newOL)
-}
+const clearButtons = () => {
+  const newButtons = document.getElementById("new-button-section");
+  newButtons.innerHTML = null;
+};
