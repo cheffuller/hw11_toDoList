@@ -29,19 +29,19 @@ const filterTodos = () => {
   fetchTodos()
     .then((res) => res.json())
     .then((todos) => {
-      let filteredList
       const userId = document.getElementById("user-id").value;
       console.log(userId);
-
+      let filteredList = [];
       todos.forEach((currentElement, index) => {
-        if todos[index]["userId"] === userID {
-          filteredList[index] = todos[index];
+        
+        if (todos[index]["userId"] == userId) {
+          const user = todos[index]["userId"];
+          console.log(user);
         }
       });
-      console.log(filteredList);
+      // console.log(filteredList);
     });
-    // console.log(listOfTodos);
-   
+  // console.log(listOfTodos);
 };
 
 // console.log(listOfTodos());
