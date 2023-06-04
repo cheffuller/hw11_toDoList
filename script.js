@@ -84,12 +84,21 @@ const filterTodos = () => {
         alert("Please enter a number between 1 and 10");
         return;
       }
-      todos.forEach((currentElement, index) => {
-        if (todos[index]["userId"] === userId) {
-          writeTodos(todos, index);
-          filteredList.push(todos[index]);
-        }
+
+      filteredList = todos.filter(index => {
+        return index.userId === userId;
       });
+    
+      filteredList.forEach((currentElement, index) => {
+        writeTodos(filteredList, index);
+      })
+
+      // todos.forEach((currentElement, index) => {
+      //   if (todos[index]["userId"] === userId) {
+      //     writeTodos(todos, index);
+      //     filteredList.push(todos[index]);
+      //   }
+      // });
 
       const newCompletedButton = document.createElement("button");
       newCompletedButton.onclick = completedTodos;
@@ -119,10 +128,6 @@ const clearTodos = () => {
   listOne.innerHTML = null;
   listTwo.innerHTML = null;
 };
-
-const addButtons = () => {
-  
-}
 
 const clearButtons = () => {
   const newButtons = document.getElementById("new-button-section");
