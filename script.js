@@ -120,6 +120,10 @@ const clearTodos = () => {
   listTwo.innerHTML = null;
 };
 
+const addButtons = () => {
+  
+}
+
 const clearButtons = () => {
   const newButtons = document.getElementById("new-button-section");
   newButtons.innerHTML = null;

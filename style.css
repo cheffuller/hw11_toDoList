@@ -1,6 +1,15 @@
-button {
+html {
+    background-color: #4e4e4e;
+    color: white;
+    
+}
+
+button,
+input {
     margin: 5px;
 }
+
+
 
 section {
     display: flex;
