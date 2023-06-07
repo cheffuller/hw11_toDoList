@@ -24,20 +24,17 @@ const returnTodos = fetchTodos()
 const writeTodos = (todos, index, list) => {
   // This if statement allows for a two-column list when needed but defaults to writing to a single
   // column if the second column isn't specified
-  if (typeof list === "undefined") {
+  if (list === undefined) {
     list = document.getElementById("todo-list");
   }
-
   // This section creates and writes the list elements to the html
   const newListItem = document.createElement("li");
   const newCheckBox = document.createElement("input");
   newCheckBox.type = "checkbox";
   newCheckBox.checked = todos[index].completed;
-  const newUser = document.createTextNode(`user: ${todos[index].userId} - `);
-  const newTitle = document.createTextNode(` - ${todos[index].title}`);
-  newListItem.appendChild(newUser);
+  newListItem.appendChild(document.createTextNode(`user: ${todos[index].userId} - `));
   newListItem.appendChild(newCheckBox);
-  newListItem.appendChild(newTitle);
+  newListItem.appendChild(document.createTextNode(` - ${todos[index].title}`));
   list.appendChild(newListItem);
 };
 
@@ -52,38 +49,38 @@ const populateTodos = () => {
   });
 };
 
-// This function writes the userId sorted todos that have a completed value of true
-const completedTodos = (filteredList) => {
+// This function sorts the userId sorted todos by completed value and writes them to the html
+const completedTodos = (filteredList, filterValue) => {
   clearTodos();
-  filteredList.forEach((currentElement, index) => {
-    if (filteredList[index].completed === true) {
-      writeTodos(filteredList, index);
-    }
-  });
-};
 
-// This function writes the userId sorted todos that have a completed value of false
-const incompleteTodos = (filteredList) => {
-  clearTodos();
-  filteredList.forEach((currentElement, index) => {
-    if (filteredList[index].completed === false) {
-      writeTodos(filteredList, index);
-    }
-  });
-};
+  // If no filterValue is passed, two columns are written sorted by completed value
+  if (filterValue === undefined) {
+    const list = document.getElementById("todo-list-two");
+    filteredList.forEach((currentElement, index) => {
+      if (filteredList[index].completed === true) {
+        writeTodos(filteredList, index);
+      } else {
+        writeTodos(filteredList, index, list);
+      }
+    });
 
-// This function writes the userId sorted todos in two columns, one that has a
-// completed value of true and the other a completed value of false
-const twoColumnTodos = (filteredList) => {
-  clearTodos();
-  const list = document.getElementById("todo-list-two");
-  filteredList.forEach((currentElement, index) => {
-    if (filteredList[index].completed === true) {
-      writeTodos(filteredList, index);
-    } else {
-      writeTodos(filteredList, index, list);
-    }
-  });
+    // If a filterValue is passed only one column is written, sorted by the filterValue
+  } else {
+    const compTodos = filteredList.filter((index) => {
+      return index.completed === filterValue;
+    });
+    compTodos.forEach((currentElement, index) => {
+      writeTodos(compTodos, index);
+    });
+  }
+}
+
+// This function writes a new button to the html based on parameters passed to it
+const newButton = (buttonText, buttonFunction, filteredList, filterValue) => {
+  const newButton = document.createElement("button");
+  newButton.onclick = () => buttonFunction(filteredList, filterValue);
+  newButton.appendChild(document.createTextNode(buttonText));
+  document.getElementById("new-button-section").appendChild(newButton);
 };
 
 // This function filters the todos by userId and writes them to the webpage. It also adds
@@ -100,48 +97,27 @@ const filterTodos = () => {
     }
     clearTodos();
     clearButtons();
-
     // filters todo list by userId
     const filteredList = todos.filter((index) => {
       return index.userId === userId;
     });
-
+    // writes filtered todo list
     filteredList.forEach((currentElement, index) => {
       writeTodos(filteredList, index);
     });
-
-    const newCompletedButton = document.createElement("button");
-    newCompletedButton.onclick = () => completedTodos(filteredList);
-    const newCompletedText = document.createTextNode("Completed Todos");
-    newCompletedButton.appendChild(newCompletedText);
-
-    const newIncompleteButton = document.createElement("button");
-    newIncompleteButton.onclick = () => incompleteTodos(filteredList);
-    const newIncompleteText = document.createTextNode("Incomplete Todos");
-    newIncompleteButton.appendChild(newIncompleteText);
-
-    const twoColumnButton = document.createElement("button");
-    twoColumnButton.onclick = () => twoColumnTodos(filteredList);
-    const twoColumnText = document.createTextNode("Two Column Todos");
-    twoColumnButton.appendChild(twoColumnText);
-
-    const newButtons = document.getElementById("new-button-section");
-    newButtons.appendChild(newCompletedButton);
-    newButtons.appendChild(newIncompleteButton);
-    newButtons.appendChild(twoColumnButton);
+    newButton("Completed Todos", completedTodos, filteredList, true);
+    newButton("Incomplete Todos", completedTodos, filteredList, false);
+    newButton("Two Column Todos", completedTodos, filteredList);
   });
 };
 
 // Removes todo list(s) from webpage
 const clearTodos = () => {
-  const listOne = document.getElementById("todo-list");
-  const listTwo = document.getElementById("todo-list-two");
-  listOne.innerHTML = null;
-  listTwo.innerHTML = null;
+  document.getElementById("todo-list").innerHTML = null;
+  document.getElementById("todo-list-two").innerHTML = null;
 };
 
 // Removes buttons added when sorting by userId
 const clearButtons = () => {
-  const newButtons = document.getElementById("new-button-section");
-  newButtons.innerHTML = null;
+  document.getElementById("new-button-section").innerHTML = null;
 };
