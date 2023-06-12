@@ -1,1 +1,114 @@
 # hw11_toDoList
+
+ACA homework #11 - following these instructions -
+
+Today you're going to use the Fetch API on the browser to fetch data from the JSON Placeholder API which will provide you with dummy data to create a todo list which will get you ready for next class, where you'll be filtering those todos!!
+
+Create and clone a new repo with a README called: " Dummy-Data-Todo-List ".
+Go ahead and turn in your homework now (if you're instructor creates the place for it. ;)
+Create files for HTML and JavaScript. (You can add CSS later.)
+
+You'll start with some code like this:
+
+The JavaScript
+
+    // We'll pre-populate this array with a couple objects just so it's not undefined if your internet connection isn't working properly.
+
+let arrayOfTodos = [
+    {
+    "userId": 14,
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+},
+{
+    "userId": 20,
+    "id": 2,
+    "title": "delectus aut autem",
+    "completed": false
+}]
+
+const fetchTodos = () => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+    .then( (response) => response.json())
+    .then( (json) => arrayOfTodos = json)
+}
+
+const logTodos = () => {
+    console.log(arrayOfTodos)
+}
+
+const populateTodos = () => {
+
+}
+
+The HTML
+Notice the <ol></ol> element. This is an Ordered List that takes only <li></li> elements, or List Items.
+
+Use the Ol element to insert new Li element for each todo in the arrayOfTodos.
+
+Notice to that each object comes inside curly-braces, { }. This is called a JavaScript Object. You can access an object's properties with dot-notation. See the example below:
+
+
+    const arrayOfTodos1 = [
+        {
+        "userId": 14,
+        "id": 1,
+        "title": "delectus aut autem",
+        "completed": false
+    },
+    {
+        "userId": 20,
+        "id": 2,
+        "title": "delectus aut autem",
+        "completed": false
+    }
+    ]
+
+    console.log(arrayOfTodos[0].userId) // => 14
+    console.log(arrayOfTodos[1].userId) // => 20
+
+
+After you've been able to access and console the properties on any object in the array your next step is to insert that data into an li element and insert the li into the ol.
+
+Start with getting just the first item and its title property.
+
+Then capture the ol item into a variable (getElementById)
+
+createElement to make a new LI
+
+createTextNode inside the li using the title property.
+
+Now append the text to the new element
+
+Then append the element to the ol element.
+
+Put all of that inside your populateTodos function.
+
+git status, add, commit, push
+
+Now that you have one element created and showing up on the screen, put the same code inside a for loop and iterate over the length of the array. But now just change out [0] for [i]! (Refer back to your for loop lesson if needed)
+
+We'll still be using the same JSON Placeholder API and the same /todos endpoint but this time you're going to only show/filter todos created by one user, i.e. in the 200 todos you fetch you'll see there are 10 different userIds. With the input of a number and the click of a button your todo list should only show the todos of a selected userId.
+
+The Specifications/Specs
+
+Using the assignment from yesterday, create a branch called: " Todo-Filtering ".
+
+Fetch the same data.
+
+Store the data in a variable.
+
+Add an input for the userID. This input should only take in a number from 1 - 10.
+
+Add a button that when clicked will:
+clear the previous todos from the view
+and populate it with only todos with the userID that matches the number inputted.
+then stores the currently filtered todos in a variable so that ...
+
+You can create two more buttons that when clicked:
+
+removes those todos from the view
+and shows only todos that are either:
+completed
+not completed
