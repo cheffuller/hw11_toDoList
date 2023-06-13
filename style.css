@@ -10,3 +10,11 @@ button {
 section {
     display: flex;
 }
+
+body {
+    display: flex;
+}
+
+.center {
+    margin: 100px auto;
+}

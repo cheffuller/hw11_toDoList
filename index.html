@@ -8,25 +8,26 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <label for="user-id">User ID:</label>
-    <input id="user-id" type="number" min="1" max="10" />
-    <button onclick="filterTodos()">Filter by User</button>
-    <br /><br />
-    <section id="new-button-section"></section>
-    <br />
-    <button onclick="logFetchTodos()">Fetch Todos</button>
-    <button onclick="logTodos()">Log Todos</button>
-    <button onclick="populateTodos()">Populate Todos</button>
-    <br /><br />
-    <button onclick="clearTodos()">Clear Todos</button>
-    <button onclick="clearButtons()">Clear Filtering Buttons</button>
-    <section>
-      <ol id="todo-list">
-        <!-- LIs will go here -->
-      </ol>
-      <ol id="todo-list-two">
-      </ol>
-    </section>
-    <script src="script.js"></script>
+    <div class="center">
+      <label for="user-id">User ID:</label>
+      <input id="user-id" type="number" min="1" max="10" />
+      <button onclick="filterTodos()">Filter by User</button>
+      <br /><br />
+      <section id="new-button-section"></section>
+      <br />
+      <button onclick="logFetchTodos()">Fetch Todos</button>
+      <button onclick="logTodos()">Log Todos</button>
+      <button onclick="populateTodos()">Populate Todos</button>
+      <br /><br />
+      <button onclick="clearTodos()">Clear Todos</button>
+      <button onclick="clearButtons()">Clear Filtering Buttons</button>
+      <section>
+        <ol id="todo-list">
+          <!-- LIs will go here -->
+        </ol>
+        <ol id="todo-list-two"></ol>
+      </section>
+      <script src="script.js"></script>
+    </div>
   </body>
 </html>
