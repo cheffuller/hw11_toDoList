@@ -7,14 +7,11 @@ button {
     margin: 5px;
 }
 
-section {
-    display: flex;
-}
-
-body {
+.display-flex {
     display: flex;
 }
 
 .center {
-    margin: 100px auto;
+    text-align: center;
+    margin: 40px;
 }
